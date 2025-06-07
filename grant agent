@@ -1,0 +1,77 @@
+{
+  "name": "Grant & Funding Organizer",
+  "flow": [
+    {
+      "id": "1",
+      "data": {
+        "name": "Search Grants",
+        "type": "WebSearch",
+        "inputs": {
+          "query": "Upcoming grants for entrepreneurship, economic empowerment, or community building",
+          "numResults": 5
+        }
+      },
+      "position": [100, 100]
+    },
+    {
+      "id": "2",
+      "data": {
+        "name": "Summarize Eligibility",
+        "type": "LLM Text",
+        "inputs": {
+          "prompt": "Summarize the eligibility, funding amount, and deadline from this grant info:\n\n{{input}}"
+        }
+      },
+      "position": [300, 100]
+    },
+    {
+      "id": "3",
+      "data": {
+        "name": "Match to M.O.B. Initiative",
+        "type": "LLM Text",
+        "inputs": {
+          "prompt": "Match the summarized grant info to one of the following M.O.B. initiatives: STEM Expo, Mobile Hubs, Membership Scholarships, Community Gala, or Atlanta Trip. Explain why.\n\nGrant Info:\n{{input}}"
+        }
+      },
+      "position": [500, 100]
+    },
+    {
+      "id": "4",
+      "data": {
+        "name": "Draft Proposal Outline",
+        "type": "LLM Text",
+        "inputs": {
+          "prompt": "Based on the following grant match and M.O.B. initiative, draft a 500-word proposal summary highlighting M.O.B.'s impact, mission, and how this grant will help scale the initiative.\n\nGrant Summary:\n{{input}}"
+        }
+      },
+      "position": [700, 100]
+    },
+    {
+      "id": "5",
+      "data": {
+        "name": "Output Viewer",
+        "type": "Text Display",
+        "inputs": {}
+      },
+      "position": [900, 100]
+    }
+  ],
+  "connections": [
+    {
+      "source": "1",
+      "target": "2"
+    },
+    {
+      "source": "2",
+      "target": "3"
+    },
+    {
+      "source": "3",
+      "target": "4"
+    },
+    {
+      "source": "4",
+      "target": "5"
+    }
+  ]
+}
